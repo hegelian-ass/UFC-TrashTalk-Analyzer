@@ -13,3 +13,23 @@ SEARCH_QUERIES = [
 ]
 
 url = "https://www.googleapis.com/youtube/v3/search"
+results = []
+
+fighter = input("Enter fighter name: ")
+for search_query in SEARCH_QUERIES:
+    search_term = fighter + " " + search_query
+    params = {
+    "key": API_KEY,
+    "q": search_term,
+    "part": "snippet",
+    "type": "video",
+    "maxResults": 50
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    items = data["items"]
+   for item in items:
+    video_id = item["id"]["videoId"]
+    title = item["snippet"]["title"]
+    channel = item["snippet"]["channelTitle"]
+    published_at = item["snippet"]["publishedAt"]
