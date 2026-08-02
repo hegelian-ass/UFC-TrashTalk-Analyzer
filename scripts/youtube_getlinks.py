@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import requests
 
-API_KEY = "YOUR_API_KEY"
+API_KEY = "AIzaSyCRxk516FcdWdZ48hmifz02SJsJ0wuTXDY"
 
 OUTPUT_FILE = "data/video_ids.csv"
 
@@ -27,8 +27,7 @@ for search_query in SEARCH_QUERIES:
     }
     response = requests.get(url, params=params)
 data = response.json()
-
-items = data["items"]
+print(data)
 
 for item in items:
     video_id = item["id"]["videoId"]
@@ -45,4 +44,5 @@ for item in items:
 }
 
 results.append(extract)
-print(results[-1])
+df = pd.DataFrame(results)
+print(df.head())
